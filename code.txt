@@ -1,0 +1,20 @@
+static List<TOut> Map<TIn, TOut>(List<TIn> list, Func<TIn, TOut> f)
+{
+    if (list.Count == 0)
+        return new List<TOut>();
+    return new List<TOut> { f(list[0]) }
+    .Concat(Map(list.Skip(1).ToList(), f)).ToList();
+}
+static List<T> Filter<T>(List<T> list, Predicate<T> predicate)
+{
+    if (list.Count == 0) return new List<T>();
+    var head = list[0];
+    var tail = Filter(list.Skip(1).ToList(), predicate);
+    if (predicate(head)) return new List<T> { head }.Concat(tail).ToList();
+    return tail;
+}
+static TAcc Fold<T, TAcc>(List<T> list, TAcc acc, Func<TAcc, T, TAcc> f)
+{
+    if (list.Count == 0) return acc;
+    return Fold(list.Skip(1).ToList(), f(acc, list[0]), f);
+}

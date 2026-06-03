@@ -22,7 +22,7 @@ namespace Task_exercises
             label2.Text = "Status: Writing into file....";
 
             await File.WriteAllTextAsync("numbers.txt", richTextBox1.Text);
-            await Task.Delay(9000);
+            await Task.Delay(2000);
 
 
             label2.Text = "Status: All data is writed";
@@ -44,7 +44,7 @@ namespace Task_exercises
 
                 foreach (int number in numbers)
                 {
-                    Thread.Sleep(100); // симулация на тежка обработка
+                    Thread.Sleep(1000); 
                     result += number;
                 }
 
